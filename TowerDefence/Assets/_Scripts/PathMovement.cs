@@ -4,34 +4,32 @@ using UnityEngine;
 
 public class PathMovement : MonoBehaviour 
 {	
+
+	[SerializeField] private Path path;
 	[SerializeField]private float speed;
-	private Transform[] points;
-	private int nextPointIndex = 2;
+	private int nextPointIndex = 1;
 	private float currentTime = 0.0f;
 
 
-	private void Awake()
-	{
-		GameObject path =  GameObject.Find("Path");
-		points = path.GetComponentsInChildren<Transform>();
-	}
-
 	private void Update()
 	{
-		if (nextPointIndex >= points.Length)
+		if (nextPointIndex >= path.GetPointCount())
 			return;
 
+		Vector3 currentPoint = path[nextPointIndex - 1];
+		Vector3 nextPoint = path[nextPointIndex];
+
 		currentTime += Time.deltaTime;
-		float distance = Vector3.Distance(points[nextPointIndex - 1].position, points[nextPointIndex].position);
-		transform.position = Vector3.Lerp(points[nextPointIndex - 1].position, points[nextPointIndex].position,  speed/distance * currentTime);
+		float distance = Vector3.Distance(currentPoint, nextPoint);
+		transform.position = Vector3.Lerp(currentPoint, nextPoint,  speed/distance * currentTime);
 
 		if (speed * currentTime >= distance)
 		{
 			nextPointIndex++;
 			currentTime = 0.0f;
-			if (nextPointIndex < points.Length)
+			if (nextPointIndex < path.GetPointCount())
 			{
-				Quaternion delta = Quaternion.FromToRotation(transform.forward, points[nextPointIndex].position - points[nextPointIndex - 1].position);
+				Quaternion delta = Quaternion.FromToRotation(transform.forward, nextPoint - currentPoint);
 				transform.rotation *= delta;	
 			}
 		}
