@@ -51,16 +51,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\_Scripts\BaseHealth.cs" />
-     <Compile Include="Assets\_Scripts\EnemieDamage.cs" />
-     <Compile Include="Assets\_Scripts\EnemieGenarator.cs" />
-     <Compile Include="Assets\_Scripts\Path.cs" />
-     <Compile Include="Assets\_Scripts\PathMovement.cs" />
      <Compile Include="Assets\Scripts\BaseHealth.cs" />
      <Compile Include="Assets\Scripts\EnemyDamage.cs" />
      <Compile Include="Assets\Scripts\EnemyGenerator.cs" />
+     <Compile Include="Assets\Scripts\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\Path.cs" />
      <Compile Include="Assets\Scripts\PathMovement.cs" />
+     <Compile Include="Assets\Scripts\Platform.cs" />
+     <Compile Include="Assets\Scripts\Tower.cs" />
+     <Compile Include="Assets\Scripts\TowerBuilder.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

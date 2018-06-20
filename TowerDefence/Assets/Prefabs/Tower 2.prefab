@@ -127,6 +127,7 @@ MonoBehaviour:
   attackSpeed: 0.2
   damage: 2
   attackRange: 8
+  Cost: 30
 --- !u!136 &136488210205331802
 CapsuleCollider:
   m_ObjectHideFlags: 1

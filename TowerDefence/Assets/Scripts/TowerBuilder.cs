@@ -1,12 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerBuilder : MonoBehaviour
 {
-    [SerializeField] private GameObject[] towers;
+    public static TowerBuilder Instance { get; private set; }
+
+    [SerializeField] private Text coinsCounter;
+    [SerializeField] private Tower[] towers;
+    [SerializeField] private int coins = 50;
 
     private Platform currentPlatform;
+
+    private int Coins
+    {
+        get
+        {
+            return coins;
+        }
+
+        set
+        {
+            coins = value;
+            coinsCounter.text = "Coins: " + coins;
+        }
+    }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        coinsCounter.text = "Coins: " + coins;
+    }
 
     private void Update()
     {
@@ -37,9 +66,22 @@ public class TowerBuilder : MonoBehaviour
             return;
         }
 
-        GameObject t = Instantiate(towers[index]);
-        currentPlatform.AddTower(t);
+        if(towers[index].Cost > coins)
+        {
+            Debug.LogWarning("No coins!");
+            return;
+        }
+
+        Tower t = Instantiate(towers[index]);
+        currentPlatform.AddTower(t.gameObject);
         t.transform.SetParent(currentPlatform.transform);
         t.transform.localPosition = Vector3.zero;
+
+        Coins -= t.Cost;
+    }
+
+    public void AddCoins(int count)
+    {
+        Coins += count;
     }
 }

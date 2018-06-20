@@ -8,6 +8,8 @@ public class Tower : MonoBehaviour
     [SerializeField] private int damage = 1;
     [SerializeField] private float attackRange = 5;
 
+    public int Cost = 20;
+
     private EnemyHealth target;
     private float cooldown;
 
